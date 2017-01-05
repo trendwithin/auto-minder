@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Angular/Bootstrap Test</h1>
+      <article ng-app='angular_test'>
+        <header>
+          <h1 ng-if='world'>Hello, {{world}}</h1>
+        </header>
+        <section>
+          <form class="form-inline">
+            <div class="form-group">
+              <label for="world">Expression</label>
+              <input type="text" class="form-controll" name='world' autofocus ng-model='world'>
+            </div>
+          </form>
+        </section>
+      </article>
+    </div>
+  </div>
+</div>
