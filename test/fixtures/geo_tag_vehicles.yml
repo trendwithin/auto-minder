@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# Add Fixtures Later--
+# one:
+#   make: MyString
+#   model: MyString
+#   color: MyString
+#   license_plate: MyString
+#   latitude: MyString
+#   longitude: MyString
+#   additional_info: MyText
