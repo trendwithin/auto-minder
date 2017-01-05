@@ -15,3 +15,15 @@
  *= require 'bootstrap-sass-official'
  */
 @import '../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss';
+
+
+header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('ticket.jpg');
+  background-size: cover;;
+  background-position: center;
+  height: 100vh;
+}
+
+header h1 {
+  color: #fff;
+}
