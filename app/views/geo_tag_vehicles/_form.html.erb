@@ -1,5 +1,5 @@
-
-<article ng-app='vehicles' ng-controller='VehicleInputController'></article>
+<% javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_map_api']}&v=3" %>
+<article ng-app='vehicles' ng-controller='VehicleInputCtrl'>
   <form action="">
     <div class="container">
       <div class="row">
@@ -9,7 +9,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="make">Make</label>
-                <input type="text" class="form-control" name="make" value="Chevy">
+                <input type="text" class="form-control" name="make" value="Toyota">
               </div>
             </div>
             <div class="col-md-4">
@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-4">
               <label for="color">Color</label>
-              <input type="text" class="form-control" name="color" value="black">
+              <input type="text" class="form-control" name="color" value="Black">
             </div>
           </div>
           <div class="row">
@@ -31,22 +31,26 @@
         <div class="col-md-6">
           <h1>Additional Information</h1>
           <label for="additional_info">Added Comments:</label>
-          <input type="text-area" class="form-control" name="additional_info" value="4 Tickets.  Intersection of 15th and Thomas">
+          <input type="text-area" class="form-control" name="additional_info" value="Booted w/ Tow Notice.  Intersection of 15th and Thomas">
           <div class="row">
             <div class="col-md-12">
               <span class="input-group-btn">
-                <button class="btn btn-primary btn-lg" ng-click="submitVehicle">
+                <button class="btn btn-primary btn-lg" ng-click="submitVehicle()" ng-show='vehicleMapped'>
                   Submit Info
                 </button>
               </span>
             </div>
           </div>
         </div>
-        <%# Hidden Fields For Geolocation %>
-        <input type="hidden" name="latitude">
-        <input type="hidden" name="longitude">
+        <input type="hidden" name="latitude" readonly="readonly" value={{latitude}} />
+        <input type="hidden" name="longitude" readonly="readonly" value={{longitude}} />
 
       </div>
     </div>
   </form>
+
+  <div class="container">
+    <h1>Approximate Location of Vehicle:</h1>
+    <div id="map"></div>
+  </div>
 </article>
