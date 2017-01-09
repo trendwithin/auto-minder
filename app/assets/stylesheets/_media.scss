@@ -1,0 +1,38 @@
+@media only screen and (max-width: 513px) {
+  h1 {
+    font-size: 150%;
+  }
+}
+
+@media only screen and (min-width: 990px) {
+  // Bootstrap equal height
+  .row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+  }
+
+  #map {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media only screen and (min-width: 953px) and  (max-width: 1200px) {
+  h1 {
+    font-size: 175%;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  #map {
+    margin-left: 6%;
+  }
+}
+
+@media only screen and (max-width: 989px) {
+  #map {
+    margin-left: 5%;
+  }
+}

@@ -31,6 +31,7 @@ app.controller('VehicleInputCtrl', function ($scope, $q) {
       map: $scope.map,
       title: 'Approximate Location of Vehicle.'
     });
+    document.getElementById('loader').style.display = 'none';
     $scope.vehicleMapped = true; // show Submit Button when Map Renders
   }
 }); // end controller
