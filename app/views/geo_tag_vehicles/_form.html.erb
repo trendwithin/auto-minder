@@ -1,56 +1,84 @@
-<% javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_map_api']}&v=3" %>
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_map_api']}&v=3" %>
 <article ng-app='vehicles' ng-controller='VehicleInputCtrl'>
   <form action="">
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
-          <h1>Vechicle Description:</h1>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="make">Make</label>
-                <input type="text" class="form-control" name="make" value="Toyota">
+        <div class="col-md-6 row-eq-height">
+          <div class="panel panel-primary">
+            <div class="panel-heading"><h1 class='center'>Vechicle Description:</h1></div>
+            <div class="row">
+              <div class="panel-body">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="make">Make</label>
+                    <input type="text" class="form-control" name="make" value="Toyota">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="model">Model</label>
+                    <input type="text" class="form-control" name="model" value="Celica">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="color">Color</label>
+                    <input type="text" class="form-control" name="color" value="Black">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group padding-15">
+                      <label for="license_plate">License Plate Number</label>
+                      <input type="text" class="form-control" name="licence_plate" value="123XYZ">
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <label for="model">Celica</label>
-              <input type="text" class="form-control" name="model" value="Celica">
-            </div>
-            <div class="col-md-4">
-              <label for="color">Color</label>
-              <input type="text" class="form-control" name="color" value="Black">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <label for="license_plate">License Plate Number</label>
-              <input type="text" class="form-control" name="licence_plate" value="123XYZ">
-            </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <h1>Additional Information</h1>
-          <label for="additional_info">Added Comments:</label>
-          <input type="text-area" class="form-control" name="additional_info" value="Booted w/ Tow Notice.  Intersection of 15th and Thomas">
-          <div class="row">
-            <div class="col-md-12">
-              <span class="input-group-btn">
-                <button class="btn btn-primary btn-lg" ng-click="submitVehicle()" ng-show='vehicleMapped'>
-                  Submit Info
-                </button>
-              </span>
+        <div class="col-md-6 row-eq-height">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h1 class='center'>Additional Information:</h1>
             </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="additional_info">Added Comments:</label>
+                <textarea class="form-control" rows="4" name="additional_info">Booted w/ Tow Notice.  Intersection of 15th and Thomas</textarea>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary btn-lg spacer-5" ng-click="submitVehicle()" ng-show='vehicleMapped'>
+                      Submit Info
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <input type="hidden" name="latitude" readonly="readonly" value={{latitude}} />
+            <input type="hidden" name="longitude" readonly="readonly" value={{longitude}} />
           </div>
         </div>
-        <input type="hidden" name="latitude" readonly="readonly" value={{latitude}} />
-        <input type="hidden" name="longitude" readonly="readonly" value={{longitude}} />
-
       </div>
     </div>
   </form>
 
   <div class="container">
-    <h1>Approximate Location of Vehicle:</h1>
-    <div id="map"></div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h1 class='center'>Approximate Location:</h1>
+          </div>
+          <div class="panel-body">
+            <div id="loader"></div>
+            <div id="map" class='img-responsive'></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </article>
