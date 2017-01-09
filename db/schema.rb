@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20170105180147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "geo_tag_vehicles", force: :cascade do |t|
+    t.string   "make"
+    t.string   "model"
+    t.string   "color"
+    t.string   "license_plate",   null: false
+    t.string   "latitude",        null: false
+    t.string   "longitude",       null: false
+    t.text     "additional_info"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
 end

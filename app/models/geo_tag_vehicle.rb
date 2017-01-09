@@ -1,0 +1,2 @@
+class GeoTagVehicle < ApplicationRecord
+end
