@@ -3,6 +3,11 @@ var app = angular.module('vehicles', []);
 app.controller('VehicleInputCtrl', function ($scope, $q) {
   var longitude, latitude, coords;
 
+  // Invoke, scope coordinates for form, create new Google Map
+  getGeolocationCoordinates()
+    .then(setCoords)
+    .then(buildMap);
+
   // Geolocation Coordinates
   function getGeolocationCoordinates() {
     var deferred = $q.defer();
@@ -13,12 +18,11 @@ app.controller('VehicleInputCtrl', function ($scope, $q) {
     return deferred.promise;
   }
 
-  // Invoke, scope coordinates for form, create new Google Map
-  getGeolocationCoordinates().then(function setCoords(coordsData){
+  function setCoords(coordsData){
     $scope.latitude = coordsData.latitude;
     $scope.longitude = coordsData.longitude;
-    buildMap(coordsData);
-  });
+    return coordsData;
+  }
 
   function buildMap(coords) {
     var mapOptions = {
