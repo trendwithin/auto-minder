@@ -1,5 +1,4 @@
 describe('VehicleInputCtrl', function () {
-  var $window, navigator;
   describe("Initialization", function() {
     var scope = null, controller = null;
 
@@ -11,6 +10,6 @@ describe('VehicleInputCtrl', function () {
         $scope: scope
       });
     }));
-    // test
+    // test below
   });
 });
