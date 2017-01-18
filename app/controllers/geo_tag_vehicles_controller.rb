@@ -7,6 +7,9 @@ class GeoTagVehiclesController < ApplicationController
   def new
   end
 
+  def show
+  end
+
   def create
     @vehicle = current_user.geo_tag_vehicles.build(geo_tag_vehicle_params)
     if @vehicle.save
