@@ -18,17 +18,11 @@ app.controller('VehicleInputCtrl', function ($scope, $q, $http) {
     );
     return deferred.promise;
   }
-  $scope.setCoords = function(c) {
-    return c;
-  }
 
   function setCoords(coordsData){
     // assigns the coordinates to the form data- Return Data for Google Maps API
     $scope.formData.latitude = coordsData.latitude;
     $scope.formData.longitude = coordsData.longitude;
-    // latitude = coordsData.latitude;
-    // $scope.latitude = coordsData.latitude;
-    // $scope.longitude = coordsData.longitude;
     return coordsData;
   }
 
@@ -48,7 +42,6 @@ app.controller('VehicleInputCtrl', function ($scope, $q, $http) {
   }
 
   $scope.submitVehicle = function() {
-    alert('Clicked');
     $http( {
       method: 'POST',
       url: '/geo_tag_vehicles.json',
