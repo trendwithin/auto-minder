@@ -19,6 +19,14 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def user_sign_in(user = nil)
+    visit new_user_session_path
+    email = user ? user.email : users(:vic).email
+    password = 'password'
+    fill_in 'Email', with: email
+    fill_in 'Password', with: password
+    click_button 'Log in'
+  end
 end
 
 DatabaseCleaner.strategy = :transaction

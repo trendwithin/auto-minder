@@ -2,6 +2,7 @@ require "test_helper"
 
 feature "User Accepts Geolocation" do
   scenario "Google Map Generates User Location", :js => true do
+    user_sign_in users(:vic)
     count = GeoTagVehicle.count
     assert_equal 0, count
     visit new_geo_tag_vehicle_path
@@ -13,6 +14,7 @@ feature "User Accepts Geolocation" do
     fill_in 'color', with: 'Black'
     fill_in 'license_plate', with: 'ABCXYZ'
     fill_in 'additional_info', with: 'The Test of Success'
+    page.must_have_content 'Submit Info'
     click_button 'Submit Info'
 
     visit new_geo_tag_vehicle_path
@@ -30,6 +32,7 @@ end
 
 feature 'Submit Info Button Is Not Viewable When Required Fields Have Invalid Data' do
   scenario 'Make Field is Empty', :js => true do
+    user_sign_in users(:vic)
     visit new_geo_tag_vehicle_path
     fill_in 'license_plate', with: 'ABCDEFG'
     page.wont_have_content 'Submit Info'
@@ -38,6 +41,7 @@ feature 'Submit Info Button Is Not Viewable When Required Fields Have Invalid Da
   end
 
   scenario 'License Field is Empty', :js => true do
+    user_sign_in users(:vic)
     visit new_geo_tag_vehicle_path
     fill_in 'make', with: 'Toyota'
     page.wont_have_content 'Submit Info'
@@ -46,6 +50,7 @@ feature 'Submit Info Button Is Not Viewable When Required Fields Have Invalid Da
   end
 
   scenario 'License Field Greater Than 8 Characters', :js => true do
+    user_sign_in users(:vic)
     visit new_geo_tag_vehicle_path
     fill_in 'make', with: 'Toyota'
     fill_in 'license_plate', with: '12345678'
