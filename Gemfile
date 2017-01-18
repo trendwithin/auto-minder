@@ -7,7 +7,7 @@ end
 
 # App Related Gems
 gem 'bower-rails', '~> 0.11.0'
-
+gem 'devise', '~> 4.2'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

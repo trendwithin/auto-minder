@@ -1,4 +1,6 @@
 class GeoTagVehiclesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
   end
 
@@ -6,7 +8,7 @@ class GeoTagVehiclesController < ApplicationController
   end
 
   def create
-    @vehicle = GeoTagVehicle.new(geo_tag_vehicle_params)
+    @vehicle = current_user.geo_tag_vehicles.build(geo_tag_vehicle_params)
     if @vehicle.save
       # something
     end
@@ -14,6 +16,6 @@ class GeoTagVehiclesController < ApplicationController
 
   private
     def geo_tag_vehicle_params
-      params.require(:geo_tag_vehicle).permit(:make, :model, :color, :license_plate, :additional_info, :latitude, :longitude)
+      params.require(:geo_tag_vehicle).permit(:make, :model, :color, :license_plate, :additional_info, :latitude, :longitude, :state)
     end
 end
