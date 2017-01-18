@@ -13,7 +13,13 @@ class GeoTagVehiclesController < ApplicationController
   def create
     @vehicle = current_user.geo_tag_vehicles.build(geo_tag_vehicle_params)
     if @vehicle.save
-      # something
+      flash[:notice] = 'Successfully Tagged.'
+      flash.keep(:notice)
+    else
+      respond_to do |format|
+        format.html { render :new, notices: 'Sorry. Something went wrong.'}
+        format.json { render json: @vehicle.errors, status: :unprocessable_entity }
+      end
     end
   end
 
