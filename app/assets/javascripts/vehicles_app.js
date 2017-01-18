@@ -1,6 +1,6 @@
 var app = angular.module('vehicles', ['ngMessages']);
 
-app.controller('VehicleInputCtrl', function ($scope, $q, $http) {
+app.controller('VehicleInputCtrl', function ($scope, $q, $http, $window) {
   var longitude, latitude, coords;
 
   $scope.formData = {};
@@ -48,7 +48,8 @@ app.controller('VehicleInputCtrl', function ($scope, $q, $http) {
       data: $scope.formData,
       headers: { 'Content-Type': 'application/json' }
     }).then(function(data) {
-      console.log(data);
-    });
+      // on success redirect 
+      $window.location.href = '/geo_tag_vehicles/show';
+    }); // need to handle failure
   };
 }); // end controller

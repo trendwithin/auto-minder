@@ -18,6 +18,7 @@ feature "User Accepts Geolocation" do
     page.must_have_content 'Submit Info'
     click_button 'Submit Info'
 
+    page.must_have_content 'Successfully Tagged.'
     visit new_geo_tag_vehicle_path
     assert_equal 1, GeoTagVehicle.count
     vehicle = GeoTagVehicle.last
