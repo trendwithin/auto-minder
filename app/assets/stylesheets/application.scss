@@ -55,6 +55,15 @@ h1 {
   font-weight: 300;
 }
 
+// Form Validation Color
+input.form-control.ng-invalid {
+  border: 2px solid #FA787E;
+}
+
+input.form-control.ng-valid.ng-dirty {
+  border: 2px solid #9eef23;
+}
+
 .spacer-5 {
   margin-top: 5px;
 }

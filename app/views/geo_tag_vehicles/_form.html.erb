@@ -1,6 +1,6 @@
 <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_map_api']}&v=3" %>
 <article ng-app='vehicles' ng-controller='VehicleInputCtrl'>
-  <form action="">
+  <form name='vehicleForm' ng-submit="vehicleForm.$valid && submitVehicle()" novalidate>
     <div class="container">
       <div class="row">
         <div class="col-md-6 row-eq-height">
@@ -11,27 +11,47 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="make">Make</label>
-                    <input type="text" class="form-control" name="make" value="Toyota">
+                    <input type="text" class="form-control" name="make" value="Toyota" ng-model="formData.make" required>
+                    <div ng-messages="vehicleForm.make.$error" role='alert'>
+                      <div ng-message="required">
+                      Vehicle Make Required
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="model">Model</label>
-                    <input type="text" class="form-control" name="model" value="Celica">
+                    <input type="text" class="form-control" name="model" value="Celica" ng-model="formData.model">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="color">Color</label>
-                    <input type="text" class="form-control" name="color" value="Black">
+                    <input type="text" class="form-control" name="color" value="Black", ng-model="formData.color">
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group padding-15">
                       <label for="license_plate">License Plate Number</label>
-                      <input type="text" class="form-control" name="licence_plate" value="123XYZ">
+                      <input type="text" class="form-control" name="license_plate" placeholder="123xyz" ng-maxlength="7" ng-model="formData.license_plate" required>
+                      {{formData}}
                     </div>
+                    <div ng-messages="vehicleForm.license_plate.$error" role="alert">
+                     <div ng-message="required">
+                       Please enter a value for this field.
+                     </div>
+                     <div ng-message="maxlength">
+                       This field can be at most 8 characters long.
+                     </div>
+                   </div>
+                    <pre>vehicleForm.license_plate.$error = {{ vehicleForm.license_plate.$error | json }}</pre>
+                    <!-- <div ng-messages="myForm.license_plate.$error" style="color:maroon" role="alert">
+                      <div ng-message="required">You did not enter a field</div>
+                      <div ng-message="minlength">Your field is too short</div>
+                      <div ng-message="maxlength">Your field is too long</div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -46,20 +66,19 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="additional_info">Added Comments:</label>
-                <textarea class="form-control" rows="4" name="additional_info">Booted w/ Tow Notice.  Intersection of 15th and Thomas</textarea>
+                <textarea class="form-control" rows="4" name="additional_info" ng-model="formData.additional_info">Booted w/ Tow Notice.  Intersection of 15th and Thomas</textarea>
               </div>
               <div class="row">
                 <div class="col-md-12">
+                  <div> vehicleForm is {{vehicleForm.$valid}}</div>
                   <span class="input-group-btn">
-                    <button class="btn btn-primary btn-lg spacer-5" ng-click="submitVehicle()" ng-show='vehicleMapped'>
+                    <button type='submit' class="btn btn-primary btn-lg spacer-5" ng-show="vehicleForm.$valid">
                       Submit Info
                     </button>
                   </span>
                 </div>
               </div>
             </div>
-            <input type="hidden" name="latitude" readonly="readonly" value={{latitude}} />
-            <input type="hidden" name="longitude" readonly="readonly" value={{longitude}} />
           </div>
         </div>
       </div>

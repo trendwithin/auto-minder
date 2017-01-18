@@ -1,7 +1,13 @@
-var app = angular.module('vehicles', []);
+var app = angular.module('vehicles', ['ngMessages']);
 
-app.controller('VehicleInputCtrl', function ($scope, $q) {
+app.controller('VehicleInputCtrl', function ($scope, $q, $http) {
   var longitude, latitude, coords;
+
+  $scope.formData = {};
+  // Invoke, scope coordinates for form, create new Google Map
+  getGeolocationCoordinates()
+    .then(setCoords)
+    .then(buildMap);
 
   // Geolocation Coordinates
   function getGeolocationCoordinates() {
@@ -12,13 +18,19 @@ app.controller('VehicleInputCtrl', function ($scope, $q) {
     );
     return deferred.promise;
   }
+  $scope.setCoords = function(c) {
+    return c;
+  }
 
-  // Invoke, scope coordinates for form, create new Google Map
-  getGeolocationCoordinates().then(function setCoords(coordsData){
-    $scope.latitude = coordsData.latitude;
-    $scope.longitude = coordsData.longitude;
-    buildMap(coordsData);
-  });
+  function setCoords(coordsData){
+    // assigns the coordinates to the form data- Return Data for Google Maps API
+    $scope.formData.latitude = coordsData.latitude;
+    $scope.formData.longitude = coordsData.longitude;
+    // latitude = coordsData.latitude;
+    // $scope.latitude = coordsData.latitude;
+    // $scope.longitude = coordsData.longitude;
+    return coordsData;
+  }
 
   function buildMap(coords) {
     var mapOptions = {
@@ -27,11 +39,23 @@ app.controller('VehicleInputCtrl', function ($scope, $q) {
     }
     $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
     $scope.marker = new google.maps.Marker( {
-      position: {lat: $scope.latitude, lng: $scope.longitude },
+      position: {lat: coords.latitude, lng: coords.longitude },
       map: $scope.map,
       title: 'Approximate Location of Vehicle.'
     });
     document.getElementById('loader').style.display = 'none';
     $scope.vehicleMapped = true; // show Submit Button when Map Renders
   }
+
+  $scope.submitVehicle = function() {
+    alert('Clicked');
+    $http( {
+      method: 'POST',
+      url: '/geo_tag_vehicles.json',
+      data: $scope.formData,
+      headers: { 'Content-Type': 'application/json' }
+    }).then(function(data) {
+      console.log(data);
+    });
+  };
 }); // end controller
