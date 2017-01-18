@@ -32,7 +32,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-9">
                     <div class="form-group padding-15">
                       <label for="license_plate">License Plate Number</label>
                       <input type="text" class="form-control" name="license_plate" placeholder="123xyz" ng-maxlength="7" ng-model="formData.license_plate" required>
@@ -43,15 +43,14 @@
                        Please enter a value for this field.
                      </div>
                      <div ng-message="maxlength">
-                       This field can be at most 8 characters long.
+                       This field can be at most 7 characters long.
                      </div>
                    </div>
                     <pre>vehicleForm.license_plate.$error = {{ vehicleForm.license_plate.$error | json }}</pre>
-                    <!-- <div ng-messages="myForm.license_plate.$error" style="color:maroon" role="alert">
-                      <div ng-message="required">You did not enter a field</div>
-                      <div ng-message="minlength">Your field is too short</div>
-                      <div ng-message="maxlength">Your field is too long</div>
-                    </div> -->
+                  </div>
+                  <div class="col-md-3">
+                    <label for="state">State</label>
+                    <input type="text" class="form-control" name="state" ng-model="formData.state" required >
                   </div>
                 </div>
               </div>
