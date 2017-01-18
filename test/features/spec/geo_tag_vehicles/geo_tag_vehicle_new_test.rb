@@ -27,3 +27,28 @@ feature "User Accepts Geolocation" do
     assert_equal "-73.961452", vehicle.longitude
   end
 end
+
+feature 'Submit Info Button Is Not Viewable When Required Fields Have Invalid Data' do
+  scenario 'Make Field is Empty', :js => true do
+    visit new_geo_tag_vehicle_path
+    fill_in 'license_plate', with: 'ABCDEFG'
+    page.wont_have_content 'Submit Info'
+    fill_in 'make', with: 'Toyota'
+    page.must_have_content 'Submit Info'
+  end
+
+  scenario 'License Field is Empty', :js => true do
+    visit new_geo_tag_vehicle_path
+    fill_in 'make', with: 'Toyota'
+    page.wont_have_content 'Submit Info'
+    fill_in 'license_plate', with: 'XYZ'
+    page.must_have_content 'Submit Info'
+  end
+
+  scenario 'License Field Greater Than 8 Characters', :js => true do
+    visit new_geo_tag_vehicle_path
+    fill_in 'make', with: 'Toyota'
+    fill_in 'license_plate', with: '12345678'
+    page.wont_have_content 'Submit Info'
+  end
+end
