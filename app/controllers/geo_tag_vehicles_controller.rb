@@ -2,6 +2,15 @@ class GeoTagVehiclesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    if params[:keywords].present?
+      @keywords = params[:keywords]
+      search_term = VehicleSearch.new(@keywords)
+      @vehicles = GeoTagVehicle.where(search_term.where_clause, search_term.where_args)
+      flash[:alert] = 'No Match Found' if @vehicles.empty?
+      flash[:success] = 'Potential Matches' unless @vehicles.empty?
+    else
+      @vehicles = []
+    end
   end
 
   def new
