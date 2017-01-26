@@ -1,1 +1,38 @@
-<h1>Future Index Page</h1>
+<div class="container">
+  <div class="search">
+    <h1>Vehicle Search</h1>
+    <section class="search-form">
+      <%= form_for :geo_tag_vehicles, method: :get do |f| %>
+        <div class="input-group input-group-lg">
+          <%= label_tag :keywords, nil, class: "sr-only" %>
+          <%= text_field_tag :keywords, nil, placeholder: "Enter a license plate", class: "form-control input-lg" %>
+          <span class="input-group-btn">
+            <%= submit_tag "Find Vehicle", class: "btn btn-primary btn-lg" %>
+          </span>
+        </div>
+      <% end %>
+    </section>
+  </div>
+
+  <div class="search-results">
+    <section>
+      <h1>Results</h1>
+    </section>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+        <th>License</th>
+        <th>State</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @vehicles.each do |vehicle| %>
+          <tr>
+            <td><%= vehicle.license_plate %></td>
+            <td><%= vehicle.state %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

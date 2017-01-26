@@ -3,8 +3,6 @@ require "test_helper"
 feature "User Accepts Geolocation" do
   scenario "Google Map Generates User Location", :js => true do
     user_sign_in users(:vic)
-    count = GeoTagVehicle.count
-    assert_equal 0, count
     visit new_geo_tag_vehicle_path
     page.must_have_content "TAG VEHICLE"
     page.has_css?('div#map')
@@ -20,7 +18,6 @@ feature "User Accepts Geolocation" do
 
     page.must_have_content 'Successfully Tagged.'
     visit new_geo_tag_vehicle_path
-    assert_equal 1, GeoTagVehicle.count
     vehicle = GeoTagVehicle.last
     assert_equal 'Toyota', vehicle.make
     assert_equal 'Celica', vehicle.model

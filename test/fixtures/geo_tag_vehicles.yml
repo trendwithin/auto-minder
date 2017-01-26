@@ -1,11 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# Add Fixtures Later--
-# one:
-#   make: MyString
-#   model: MyString
-#   color: MyString
-#   license_plate: MyString
-#   latitude: MyString
-#   longitude: MyString
-#   additional_info: MyText
+toyota:
+  make: Toyota
+  model: Celica
+  color: Black
+  license_plate: xyz123
+  latitude: 45.45
+  longitude: -122.122
+  state: WA
+  additional_info: Found Vehicle
+  user: vic
