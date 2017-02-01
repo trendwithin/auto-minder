@@ -1,0 +1,15 @@
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_map_api']}&v=3" %>
+<div class="container">
+  <div class="row">
+    <section ng-app='vehicles' ng-controller='TagMyVehiclesController'>
+      <div class="col-md-12">
+        <button class="btn-primary btn-lg" width="100%">
+          Tag
+        </button>
+        <div id="map">
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
