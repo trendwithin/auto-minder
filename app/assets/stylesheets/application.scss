@@ -16,6 +16,12 @@
  */
 @import '../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss';
 
+// colors
+$primary: #BACDB0;
+$secondary: #729B79;
+$slate: #475B63;
+$dark: #2E2C2F;
+
 html {
   background-color: #fff;
   color: #555;
@@ -96,6 +102,22 @@ input.form-control.ng-valid.ng-dirty {
     animation: spin 2s linear infinite;
     left: 50%;
     margin-left: 50%;
+}
+
+.jumbotron {
+  background-color: $slate;
+  color: #fff;
+}
+
+// Signs
+tr:nth-child(even) {
+  background: $secondary;
+  font-weight: bold;
+  color: #fff;
+}
+tr:nth-child(odd) {
+  font-weight: bold;
+  color: 000;
 }
 
 // Font-Awesomeness
