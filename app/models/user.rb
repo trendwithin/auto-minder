@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :geo_tag_vehicles
+  has_many :tag_my_vehicles
 end
