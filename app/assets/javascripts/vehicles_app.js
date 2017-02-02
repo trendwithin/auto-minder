@@ -13,7 +13,7 @@ app.factory('socrataData', function($http, $q) {
   };
 });
 
-app.factory('vehicleCoordinats', function($q) {
+app.factory('vehicleCoordinates', function($q) {
   var service = {};
   var formData = {};
 
@@ -36,15 +36,16 @@ app.factory('vehicleCoordinats', function($q) {
 });
 
 // TagMyVehiclesController
-app.controller('TagMyVehiclesController', function ($scope, vehicleCoordinats, socrataData) {
-  $scope.test = vehicleCoordinats.getGeolocationCoordinates().then(vehicleCoordinats.setCoords).then(buildMap);
-
+app.controller('TagMyVehiclesController', function ($scope, $http, $window, vehicleCoordinates, socrataData) {
+  vehicleCoordinates.getGeolocationCoordinates().then(vehicleCoordinates.setCoords).then(buildMap);
+  $scope.formData = {};
   function buildMap(coords) {
+    $scope.formData.latitude = coords.latitude;
+    $scope.formData.longitude = coords.longitude;
     var mapOptions = {
       zoom: 18,
       center: new google.maps.LatLng(coords.latitude, coords.longitude),
     }
-
     $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
     $scope.marker = new google.maps.Marker( {
       position: {lat: coords.latitude, lng: coords.longitude },
@@ -55,6 +56,7 @@ app.controller('TagMyVehiclesController', function ($scope, vehicleCoordinats, s
     });
     socrataData.getStreetParkingSigns(coords).then(function(data) {
       $scope.signs = data;
+      console.log($scope.signs);
       angular.forEach(data, function(value, key) {
         $scope.marker = new google.maps.Marker( {
           position: new google.maps.LatLng(value.shape_lat, value.shape_lng ),
@@ -65,8 +67,20 @@ app.controller('TagMyVehiclesController', function ($scope, vehicleCoordinats, s
     }).catch(function() {
       $scope.error = 'Unable to access data.';
     });
+    document.getElementById('loader').style.display = 'none';
     $scope.vehicleMapped = true; // show Submit Button when Map Renders
   }
+  $scope.submitVehicle = function() {
+    $http( {
+      method: 'POST',
+      url: '/tag_my_vehicles.json',
+      data: $scope.formData,
+      headers: { 'Content-Type': 'application/json' }
+    }).then(function(data) {
+      // on success redirect
+      $window.location.href = '/tag_my_vehicles/show';
+    });
+  };
 });
 
 
