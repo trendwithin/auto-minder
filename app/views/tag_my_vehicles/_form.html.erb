@@ -1,0 +1,45 @@
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_map_api']}&v=3" %>
+<div class="container">
+  <section ng-app='vehicles' ng-controller='TagMyVehiclesController as tagVehicle'>
+    <div class="row">
+       <div class="col-md-8 col-md-offset-2">
+         <div class="panel panel-success">
+            <div class="panel-heading">
+              <h1 class='center'>Location</h1>
+            </div>
+         <div class="panel-body">
+            <div class="embed-responsive embed-responsive-16by9">
+               <div id="map_canvas" class="embed-responsive-item" style="border: 1px solid black">
+                  <div id="loader"></div>
+                  <div id="map"></div>
+              </div>
+            </div>
+            <form name='tagMyVehicleForm' ng-submit="submitVehicle()" novalidate>
+              <button type='submit' class="btn btn-primary btn-lg spacer-5" ng-show="vehicleMapped">
+                Tag Vehicle
+              </button>
+            </form>
+          </div>
+        </div>
+     </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table signs">
+            <tr>
+              <th>Approximate Distance</th>
+              <th>Description</th>
+              <th>Category</th>
+            </tr>
+            <tr ng-repeat="sign in signs | orderBy:'distance'">
+              <td>{{sign.distance}}</td>
+               <td>{{sign.unitdesc}}</td>
+               <td>{{sign.categorydescr}}</td>
+             </tr>
+           </table>
+         </div>
+       </div>
+     </div>
+  </section>
+</div>
